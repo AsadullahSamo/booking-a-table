@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <main className='h-[100vh] w-[100%] bg-gray-400'>
+      <main className='h-[100vh] w-[100%]'>
         {/* <Login /> */}
         <Home />
       </main>
