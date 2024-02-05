@@ -2,7 +2,7 @@ import React from 'react'
 import Chef from '../assets/Chef.png'
 import GreekSalad from '../assets/salad.png'
 import Brushette from '../assets/brushette.png'
-
+import { Link } from 'react-router-dom'
 export default function Home() {
 
 	return (
@@ -13,8 +13,8 @@ export default function Home() {
 				<div>
 					<p className='ml-5 pt-10 text-[#f4ce14] text-3xl'> Little Lemon </p> <br />
 					<p className='text-white pl-5 text-3xl -mt-4'> California </p>
-					<p className='pl-5 text-white text-[20px] mt-5 w-72'>We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
-					<button className='bg-[#f4ce14] w-36 h-10 mt-5 ml-5 rounded-lg hover:cursor-pointer hover:transition-all duration-800 hover:bg-[#495e57] hover:text-white'> Reserve a table </button>
+					<p className='pl-5 text-white text-[20px] mt-5 w-72 mb-10'>We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
+					<Link to='/reservation' className='ml-5 bg-[#f4ce14] w-36 h-10 font-semibold rounded-lg hover:cursor-pointer hover:transition-all duration-800 hover:bg-[#495e57] hover:text-white px-5 py-2'> Reserve a table </Link>
 				</div>
 			</div>
 
