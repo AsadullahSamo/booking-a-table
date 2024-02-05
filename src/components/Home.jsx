@@ -3,7 +3,40 @@ import Chef from '../assets/Chef.png'
 import GreekSalad from '../assets/salad.png'
 import Brushette from '../assets/brushette.png'
 import { Link } from 'react-router-dom'
+import { set } from 'date-fns'
 export default function Home() {
+
+	const [greekSelected, setGreekSelected] = React.useState(false)
+	const [brushetteSelected, setBrushetteSelected] = React.useState(false)
+	const handleGreekSaladSelected = (e) => {
+		if (greekSelected) {
+			setGreekSelected(false)
+		} else {
+			setGreekSelected(true)
+		}
+	}
+	const handleBrushetteSelected = (e) => {
+		if (brushetteSelected) {
+			setBrushetteSelected(false)
+		} else {
+			setBrushetteSelected(true)
+		}
+	}
+
+	const handleItemSelection = (itemName, setSelected) => {
+		if (itemName === 'greek') {
+			setSelected(!greekSelected)
+		} else {
+			setSelected(!brushetteSelected)
+		}
+	};
+
+	const handleClick = (e) => {
+		if (!greekSelected && !brushetteSelected) {
+			alert('Please select an item to add to your cart')
+			return
+		}
+	}
 
 	return (
 
@@ -14,7 +47,7 @@ export default function Home() {
 					<p className='ml-5 pt-10 text-[#f4ce14] text-3xl'> Little Lemon </p> <br />
 					<p className='text-white pl-5 text-3xl -mt-4'> California </p>
 					<p className='pl-5 text-white text-[20px] mt-5 w-72 mb-10'>We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
-					<Link to='/reservation' className='ml-5 bg-[#f4ce14] w-36 h-10 font-bold rounded-lg hover:cursor-pointer hover:transition-all duration-800 hover:bg-[#495e57] hover:text-white px-5 py-2'> Reserve a table </Link>
+					<Link onClick={handleClick} to={`${brushetteSelected || greekSelected ? '/reservation' : '#'}`} className='ml-5 bg-[#f4ce14] w-36 h-10 font-bold rounded-lg hover:cursor-pointer hover:transition-all duration-800 hover:bg-[#495e57] hover:text-white px-5 py-2'> Reserve a table </Link>
 				</div>
 			</div>
 
@@ -28,7 +61,7 @@ export default function Home() {
 			</ul>
 
 			<div className='flex md:gap-16 justify-center md:flex-row flex-col items-center'>
-				<div className='flex w-96'>
+				<div onClick={() => handleItemSelection('greek', setGreekSelected)} className={`flex w-[420px] border-solid border hover:cursor-pointer mt-10 ${greekSelected ? 'bg-slate-100' : 'border-none'}`}>
 					<figure className='my-10 mx-5'>
 						<img src={GreekSalad} alt="Greek Salad" />
 						<figcaption className='ml-8'> Greek Salad </figcaption>
@@ -37,7 +70,7 @@ export default function Home() {
 					<p className='mt-24 -ml-56 text-[#495e57]'> $12.99 </p>
 				</div>
 
-				<div className='flex w-96'>
+				<div onClick={() => handleItemSelection('brushette', setBrushetteSelected)} className={`flex w-[420px] border-solid border hover:cursor-pointer mt-10 ${brushetteSelected ? 'bg-slate-100' : 'border-none'}`}>
 					<figure className='my-10 mx-5'>
 						<img src={Brushette} alt="Brushette" />
 						<figcaption className='ml-12'> Brushette </figcaption>

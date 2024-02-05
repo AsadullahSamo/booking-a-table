@@ -19,9 +19,15 @@ const Reservation = () => {
         setDate((prev) => ({ ...prev, endValue, startValue, rangeDates }));
     };
 
+    const handleClick = () => {
+        if (!selectedTimeSlot || !selectedPeopleSlot) {
+            alert('Please select a time and number of people');
+        }
+    }
+
     const [selectedTimeSlot, setSelectedTimeSlot] = React.useState<HTMLElement | null>(null);
     const [selectedPeopleSlot, setSelectedPeopleSlot] = React.useState<HTMLElement | null>(null);
-    const handleClick = (e) => {
+    const handleTimeClick = (e) => {
         if (selectedTimeSlot) {
             selectedTimeSlot.style.backgroundColor = '';
             selectedTimeSlot.style.color = '';
@@ -62,10 +68,10 @@ const Reservation = () => {
 
                 <p className="mt-5 mb-2 pl-10 font-bold text-xl"> Time </p>
                 <ul className="flex gap-5 justify-center">
-                    <li onClick={handleClick} className="font-semibold text-[18px] hover:bg-[#e0e0e0] hover:transition-all duration-500 hover:cursor-pointer hover:border hover:border-[#f4ce14] hover:rounded-full px-3"> 5 pm </li>
-                    <li onClick={handleClick} className="font-semibold text-[18px] hover:bg-[#e0e0e0] hover:transition-all duration-500 hover:cursor-pointer hover:border hover:border-[#f4ce14] hover:rounded-full px-3"> 6 pm </li>
-                    <li onClick={handleClick} className="font-semibold text-[18px] hover:bg-[#e0e0e0] hover:transition-all duration-500 hover:cursor-pointer hover:border hover:border-[#f4ce14] hover:rounded-full px-3"> 7 pm </li>
-                    <li onClick={handleClick} className="font-semibold text-[18px] hover:bg-[#e0e0e0] hover:transition-all duration-500 hover:cursor-pointer hover:border hover:border-[#f4ce14] hover:rounded-full px-3"> 8 pm </li>
+                    <li onClick={handleTimeClick} className="font-semibold text-[18px] hover:bg-[#e0e0e0] hover:transition-all duration-500 hover:cursor-pointer hover:border hover:border-[#f4ce14] hover:rounded-full px-3"> 5 pm </li>
+                    <li onClick={handleTimeClick} className="font-semibold text-[18px] hover:bg-[#e0e0e0] hover:transition-all duration-500 hover:cursor-pointer hover:border hover:border-[#f4ce14] hover:rounded-full px-3"> 6 pm </li>
+                    <li onClick={handleTimeClick} className="font-semibold text-[18px] hover:bg-[#e0e0e0] hover:transition-all duration-500 hover:cursor-pointer hover:border hover:border-[#f4ce14] hover:rounded-full px-3"> 7 pm </li>
+                    <li onClick={handleTimeClick} className="font-semibold text-[18px] hover:bg-[#e0e0e0] hover:transition-all duration-500 hover:cursor-pointer hover:border hover:border-[#f4ce14] hover:rounded-full px-3"> 8 pm </li>
                 </ul>
 
                 <p className="mt-14 mb-2 pl-10 font-bold text-xl"> Number of people </p>
@@ -78,7 +84,7 @@ const Reservation = () => {
                 </ul>
 
 
-                <Link to='/signup' className="ml-[30%] bg-[#f4ce14] w-36 h-10 font-bold rounded-lg hover:cursor-pointer hover:transition-all duration-800 hover:bg-[#495e57] hover:text-white px-5 py-2"> Confirm </Link>
+                <Link onClick={handleClick} to={`${selectedTimeSlot && selectedPeopleSlot ? '/signup' : '#'}`} className="ml-[30%] bg-[#f4ce14] w-36 h-10 font-bold rounded-lg hover:cursor-pointer hover:transition-all duration-800 hover:bg-[#495e57] hover:text-white px-5 py-2"> Confirm </Link>
             </div>
 
 
