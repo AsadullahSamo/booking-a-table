@@ -1,9 +1,11 @@
 import React from "react";
 import { Datepicker, DatepickerEvent } from "@meinefinsternis/react-horizontal-date-picker";
 import { enUS } from "date-fns/locale";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom/dist";
+import MetaTags from "./MetaTags";
 
 const Reservation = () => {
+	const navigate = useNavigate();
 	const [date, setDate] = React.useState<{
 		endValue: Date | null;
 		startValue: Date | null;
@@ -19,10 +21,15 @@ const Reservation = () => {
 		setDate((prev) => ({ ...prev, endValue, startValue, rangeDates }));
 	};
 
-	const handleClick = () => {
+	const handleClick = (e) => {
+		e.preventDefault();
 		if (!selectedTimeSlot || !selectedPeopleSlot) {
 			alert('Please select a time and number of people');
+		} else {
+			alert('Thanks for reserving a table! See you at the restaurant!ion');
+			navigate('/home');
 		}
+
 	}
 
 	const [selectedTimeSlot, setSelectedTimeSlot] = React.useState<HTMLElement | null>(null);
@@ -49,6 +56,7 @@ const Reservation = () => {
 	return (
 		<>
 			<section className='pt-24 w-96 h-[100vh] bg-gray-100 m-auto'>
+				<MetaTags title="Little Lemon Reservation" />
 				<header>
 					<h2 className="font-bold text-xl pl-10"> Date </h2>
 					<Datepicker
@@ -90,13 +98,12 @@ const Reservation = () => {
 				</section>
 
 				<footer className="ml-[30%]">
-					<Link
+					<button
 						onClick={handleClick}
-						to={`${selectedTimeSlot && selectedPeopleSlot ? '/signup' : '#'}`}
 						className="bg-[#f4ce14] w-36 h-10 font-bold rounded-lg hover:cursor-pointer hover:transition-all duration-800 hover:bg-[#495e57] hover:text-white px-5 py-2"
 					>
 						Confirm
-					</Link>
+					</button>
 				</footer>
 			</section>
 		</>

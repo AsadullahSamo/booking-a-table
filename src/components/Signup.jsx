@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LittleLemon from '../assets/little-lemon.png';
 import { Link, useNavigate } from 'react-router-dom';
+import MetaTags from './MetaTags';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -21,23 +22,27 @@ const Signup = () => {
         e.preventDefault();
         const { firstName, lastName, phone, password } = inputs;
 
+        if (firstName !== '' || phone !== '' || password !== '') {
+            if (localStorage.getItem('user')) {
+                alert('Account already exists, please login');
+                navigate('/login');
+                return;
+            }
+        }
+
         if (firstName === '' || lastName === '' || phone === '' || password === '') {
             alert('Please fill in all fields');
             return;
         }
 
-        if (localStorage.getItem('user')) {
-            alert('Account already exists, please login');
-            return;
-        }
-
         alert('Thanks for creating an account! You can now proceed with table reservation.');
         localStorage.setItem('user', JSON.stringify(inputs));
-        navigate('/');
+        navigate('/login');
     };
 
     return (
         <section className="w-96 h-full bg-gray-100 m-auto">
+            <MetaTags title="Little Lemon Signup" />
             <Link to="/" className="text-6xl">
                 &larr;
             </Link>
@@ -49,7 +54,7 @@ const Signup = () => {
 
             <form>
                 <label className="mt-10 ml-5 font-semibold" htmlFor="first-name">
-                    FIRST NAME <br />
+                    FIRST NAME <span className='text-red-600'>*</span> <br />
                     <input
                         required={true}
                         onChange={handleChange}
@@ -62,7 +67,7 @@ const Signup = () => {
                 </label>
 
                 <label className="mt-10 ml-5 font-semibold" htmlFor="last-name">
-                    LAST NAME <br />
+                    LAST NAME <span className='text-red-600'>*</span> <br />
                     <input
                         required={true}
                         onChange={handleChange}
@@ -75,7 +80,7 @@ const Signup = () => {
                 </label>
 
                 <label className="mt-10 ml-5 font-semibold" htmlFor="phone">
-                    PHONE <br />
+                    PHONE <span className='text-red-600'>*</span> <br />
                     <input
                         required={true}
                         onChange={handleChange}
@@ -90,7 +95,7 @@ const Signup = () => {
                 </label>
 
                 <label className="mt-10 ml-5 font-semibold" htmlFor="password">
-                    PASSWORD <br />
+                    PASSWORD <span className='text-red-600'>*</span> <br />
                     <input
                         required={true}
                         onChange={handleChange}

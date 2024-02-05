@@ -1,19 +1,15 @@
-import { useState } from 'react'
-import Login from './components/Login'
-import Home from './components/Home'
-import Reservation from './components/Reservation'
+import Signup from './components/Signup'
 
 function App() {
 
   return (
+
     <>
       <main className='h-[100vh] w-[100%]'>
-        {/* <Login /> */}
-        <Home />
-        {/* <Reservation /> */}
+        <Signup />
       </main>
-
     </>
+
   )
 }
 

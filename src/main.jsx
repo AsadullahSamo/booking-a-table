@@ -11,16 +11,18 @@ import Signup from './components/Signup.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/home' element={<Home />} />
       <Route path='/reservation' element={<Reservation />} />
-      <Route path='/signup' element={<Signup />} />
+      <Route path='/' element={<Signup />} />
     </>
   )
 )
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router}>
+      <App />
+    </RouterProvider>
   </React.StrictMode>,
 )

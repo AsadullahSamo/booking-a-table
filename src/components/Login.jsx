@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import LittleLemon from '../assets/little-lemon.png';
 import { Link, useNavigate } from 'react-router-dom';
+import MetaTags from './MetaTags';
+import { Alert } from '@aws-amplify/ui-react';
 
 const Login = () => {
 	const navigate = useNavigate();
-
 	const [inputs, setInputs] = useState({
 		firstName: '',
 		lastName: '',
@@ -28,31 +29,35 @@ const Login = () => {
 		}
 
 		if (user.firstName !== firstName) {
-			alert('Firstname not found, please create an account first');
+			alert('Firstname is incorrect');
+			return;
+		}
+		else if (user.lastName !== lastName) {
+			alert('Lastname is incorrect');
 			return;
 		}
 		else if (user.phone !== phone) {
-			alert('Phone number not found, please create an account first');
+			alert('Phone number is incorrect');
 			return;
 		}
 		else if (user.password !== password) {
-			alert('Password is incorrect, please create an account first');
+			alert('Password is incorrect');
 			return;
 		} else {
-			alert('Thanks for reserving a table! See you at the restaurant!');
-			navigate('/');
+			navigate('/home');
 		}
 	}
 
 	return (
 		<section className="w-96 h-full bg-gray-100 m-auto">
+			<MetaTags title="Little Lemon Login Page" />
 			<Link to="/" className="text-6xl">
 				&larr;
 			</Link>
 			<img src={LittleLemon} alt="Little Lemon Logo" className="m-auto w-48 h-48 object-contain" />
 			<form action="">
 				<label className="mt-10 ml-5 font-semibold" htmlFor="first-name">
-					FIRST NAME <br />
+					FIRST NAME <span className='text-red-600'>*</span> <br />
 					<input
 						required={true}
 						onChange={handleChange}
@@ -65,7 +70,7 @@ const Login = () => {
 				</label>
 
 				<label className="mt-10 ml-5 font-semibold" htmlFor="last-name">
-					LAST NAME <br />
+					LAST NAME <span className='text-red-600'>*</span> <br />
 					<input
 						required={true}
 						onChange={handleChange}
@@ -78,7 +83,7 @@ const Login = () => {
 				</label>
 
 				<label className="mt-10 ml-5 font-semibold" htmlFor="phone">
-					PHONE <br />
+					PHONE <span className='text-red-600'>*</span> <br />
 					<input
 						required={true}
 						onChange={handleChange}
@@ -93,7 +98,7 @@ const Login = () => {
 				</label>
 
 				<label className="mt-10 ml-5 font-semibold" htmlFor="password">
-					PASSWORD <br />
+					PASSWORD <span className='text-red-600'>*</span> <br />
 					<input
 						required={true}
 						onChange={handleChange}
@@ -114,6 +119,13 @@ const Login = () => {
 						className="mt-2 mb-5 border border-solid rounded-md ml-5 w-[21rem] bg-black text-white hover:bg-white hover:text-black pl-2 hover:cursor-pointer transition-all duration-500 hover:border-solid hover:border border-black"
 					/>
 				</label>
+
+				<p className="text-center text-[13px] text-[#495e57]">
+					Don't have an account?{' '}
+					<Link to="/signup" className="text-[#f4ce14] hover:cursor-pointer">
+						Sign Up
+					</Link>
+				</p>
 			</form>
 		</section>
 	);
