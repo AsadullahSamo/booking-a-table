@@ -78,7 +78,7 @@ const Reservation = () => {
                 </ul>
 
 
-                <Link to='/login' className="ml-[30%] bg-[#f4ce14] w-36 h-10 font-bold rounded-lg hover:cursor-pointer hover:transition-all duration-800 hover:bg-[#495e57] hover:text-white px-5 py-2"> Confirm </Link>
+                <Link to='/signup' className="ml-[30%] bg-[#f4ce14] w-36 h-10 font-bold rounded-lg hover:cursor-pointer hover:transition-all duration-800 hover:bg-[#495e57] hover:text-white px-5 py-2"> Confirm </Link>
             </div>
 
 
