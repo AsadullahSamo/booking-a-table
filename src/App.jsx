@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import Login from './components/Login'
 import Home from './components/Home'
+import Reservation from './components/Reservation'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
       <main className='h-[100vh] w-[100%]'>
         {/* <Login /> */}
         <Home />
+        {/* <Reservation /> */}
       </main>
 
     </>

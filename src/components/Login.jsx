@@ -42,8 +42,6 @@ export default function Login() {
 
 	return (
 		<div className='w-96 h-[100%] bg-gray-100 m-auto'>
-			<Link to='/' className='text-6xl pt-16 hover:cursor-pointer'> &larr; </Link>
-
 			<img src={LittleLemon} alt="Little Lemon Logo" className='m-auto w-48 h-48 object-contain' />
 			<p className='text-[14px] m-auto text-center w-48 -mt-14 font-semibold text-[#495e57]'> BEFORE TABLE RESERVATION CREATE A ACCOUNT </p>
 			<p className='text-center font-bold mt-5 text-2xl mb-10'> Create New Account </p>
