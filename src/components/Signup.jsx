@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import LittleLemon from '../assets/little-lemon.png';
 import { Link, useNavigate } from 'react-router-dom';
 import MetaTags from './MetaTags';
+import ReactAlert from './ReactAlert';
 
 const Signup = () => {
+    const [alert, setAlert] = useState(false);
+    const [severity, setSeverity] = useState('info');
+    const [color, setColor] = useState('warning');
+    const [msg, setMsg] = useState('');
     const navigate = useNavigate();
 
     const [inputs, setInputs] = useState({
@@ -20,33 +25,51 @@ const Signup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setAlert(true);
+        setTimeout(() => {
+            setAlert(false);
+        }, 1500);
+
         const { firstName, lastName, phone, password } = inputs;
 
         if (firstName !== '' || phone !== '' || password !== '') {
             if (localStorage.getItem('user')) {
-                alert('Account already exists, please login');
-                navigate('/login');
-                return;
+                setColor('primary');
+                setMsg('Account already exists, please login');
+                setTimeout(() => {
+                    navigate('/login');
+                }, 1500)
+                return
             }
         }
 
         if (firstName === '' || lastName === '' || phone === '' || password === '') {
-            alert('Please fill in all fields');
+            setMsg('Please fill in all fields');
             return;
         }
 
-        alert('Thanks for creating an account! You can now proceed with table reservation.');
+
+        setMsg('Thanks for creating an account! You can now proceed with table reservation.');
+        setSeverity('success');
+        setColor('success');
         localStorage.setItem('user', JSON.stringify(inputs));
-        navigate('/login');
+        setTimeout(() => {
+            navigate('/login');
+        }, 1500);
     };
 
     return (
         <section className="w-96 h-full bg-gray-100 m-auto">
             <MetaTags title="Little Lemon Signup" />
-            <Link to="/" className="text-6xl">
+            <Link to="/" className="-mt-5 text-6xl">
                 &larr;
             </Link>
-            <img src={LittleLemon} alt="Little Lemon Logo" className="m-auto w-48 h-48 object-contain" />
+
+            {alert &&
+                <ReactAlert msg={msg} msgSeverity={severity} msgColor={color} />
+            }
+
+            <img src={LittleLemon} alt="Little Lemon Logo" className="-mt-14 m-auto w-48 h-48 object-contain" />
             <p className="text-[14px] m-auto text-center w-48 -mt-14 font-semibold text-[#495e57]">
                 BEFORE TABLE RESERVATION CREATE AN ACCOUNT
             </p>

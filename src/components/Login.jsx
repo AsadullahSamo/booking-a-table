@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import LittleLemon from '../assets/little-lemon.png';
 import { Link, useNavigate } from 'react-router-dom';
 import MetaTags from './MetaTags';
-import { Alert } from '@aws-amplify/ui-react';
+import ReactAlert from './ReactAlert';
 
 const Login = () => {
+	const [alert, setAlert] = useState(false);
+	const [msg, setMsg] = useState('Please fill in all fields');
 	const navigate = useNavigate();
 	const [inputs, setInputs] = useState({
 		firstName: '',
@@ -19,29 +21,36 @@ const Login = () => {
 	};
 
 	const handleSubmit = (e) => {
+
+		setAlert(true);
+		setTimeout(() => {
+			setAlert(false);
+		}, 1500);
+
 		const user = JSON.parse(localStorage.getItem('user'));
 		e.preventDefault();
 		const { firstName, lastName, phone, password } = inputs;
 
 		if (firstName === '' || lastName === '' || phone === '' || password === '') {
-			alert('Please fill in all fields');
+			<ReactAlert msg="Please fill in all fields" />
 			return;
 		}
 
 		if (user.firstName !== firstName) {
-			alert('Firstname is incorrect');
+			setMsg('Firstname is incorrect');
 			return;
 		}
 		else if (user.lastName !== lastName) {
-			alert('Lastname is incorrect');
+			setMsg('Lastname is incorrect');
 			return;
 		}
 		else if (user.phone !== phone) {
-			alert('Phone number is incorrect');
+			setMsg('Phone is incorrect');
 			return;
 		}
 		else if (user.password !== password) {
-			alert('Password is incorrect');
+			setMsg('Password is incorrect');
+
 			return;
 		} else {
 			navigate('/home');
@@ -49,12 +58,19 @@ const Login = () => {
 	}
 
 	return (
+
 		<section className="w-96 h-full bg-gray-100 m-auto">
 			<MetaTags title="Little Lemon Login Page" />
+
 			<Link to="/" className="text-6xl">
 				&larr;
 			</Link>
-			<img src={LittleLemon} alt="Little Lemon Logo" className="m-auto w-48 h-48 object-contain" />
+
+			{alert &&
+				<ReactAlert msg={msg} />
+			}
+
+			<img src={LittleLemon} alt="Little Lemon Logo" className="m-auto -mt-10 w-48 h-48 object-contain" />
 			<form action="">
 				<label className="mt-10 ml-5 font-semibold" htmlFor="first-name">
 					FIRST NAME <span className='text-red-600'>*</span> <br />
@@ -122,7 +138,7 @@ const Login = () => {
 
 				<p className="text-center text-[13px] text-[#495e57]">
 					Don't have an account?{' '}
-					<Link to="/signup" className="text-[#f4ce14] hover:cursor-pointer">
+					<Link to="/" className="text-[#f4ce14] hover:cursor-pointer">
 						Sign Up
 					</Link>
 				</p>

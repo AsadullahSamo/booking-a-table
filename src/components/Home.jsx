@@ -4,9 +4,13 @@ import GreekSalad from '../assets/salad.png'
 import Brushette from '../assets/brushette.png'
 import { Link } from 'react-router-dom'
 import MetaTags from './MetaTags'
+import { motion } from 'framer-motion'
+import Alert from '@mui/material/Alert'
 
 export default function Home() {
 
+	const [alert, setAlert] = React.useState(false)
+	const [msg, setMsg] = React.useState('')
 	const [greekSelected, setGreekSelected] = React.useState(false)
 	const [brushetteSelected, setBrushetteSelected] = React.useState(false)
 	const handleItemSelection = (itemName, setSelected) => {
@@ -19,7 +23,11 @@ export default function Home() {
 
 	const handleClick = (e) => {
 		if (!greekSelected && !brushetteSelected) {
-			alert('Please select an item to add to your cart')
+			// setMsg('Please select an item to add to your cart')
+			setAlert(true)
+			setTimeout(() => {
+				setAlert(false)
+			}, 2000)
 			return
 		}
 	}
@@ -29,13 +37,26 @@ export default function Home() {
 		<>
 			<MetaTags title="Little Lemon" />
 			<section className='flex w-[100%] h-96 bg-[#01150f] m-auto'>
+
 				<img src={Chef} className='p-10 float-right object-contain w-96 h-96' alt="Chef bringing food" />
 				<article>
-					<p className='ml-5 pt-10 text-[#f4ce14] text-3xl'> Little Lemon </p> <br />
+					<p className='ml-5 pt-14 text-[#f4ce14] text-3xl'> Little Lemon </p> <br />
 					<p className='text-white pl-5 text-3xl -mt-4'> California </p>
 					<p className='pl-5 text-white text-[20px] mt-5 w-72 mb-10'>We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
 					<Link onClick={handleClick} to={`${brushetteSelected || greekSelected ? '/reservation' : '#'}`} className='ml-5 bg-[#f4ce14] w-36 h-10 font-bold rounded-lg hover:cursor-pointer hover:transition-all duration-800 hover:bg-[#495e57] hover:text-white px-5 py-2'> Reserve a table </Link>
 				</article>
+
+				{alert &&
+					<motion.div
+						className='-ml-48 -mt-24'
+						initial={{ y: -500 }}
+						animate={{ y: 100 }}
+						transition={{ type: "spring", stiffness: 60 }}
+					>
+						<Alert severity="info" color='primary' variant='standard'> Please select an item to add to Cart. </Alert>
+					</motion.div>
+				}
+
 			</section>
 
 			<p className='m-5 font-bold text-left md:text-center'> ORDER FOR DELIVERY </p>

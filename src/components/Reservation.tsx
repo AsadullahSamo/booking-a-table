@@ -3,8 +3,15 @@ import { Datepicker, DatepickerEvent } from "@meinefinsternis/react-horizontal-d
 import { enUS } from "date-fns/locale";
 import { Link, useNavigate } from "react-router-dom/dist";
 import MetaTags from "./MetaTags";
+import ReactAlert from "./ReactAlert";
+
 
 const Reservation = () => {
+	const [alert, setAlert] = React.useState(false);
+	const [msg, setMsg] = React.useState('');
+	const [severity, setSeverity] = React.useState('info');
+	const [color, setColor] = React.useState('warning');
+
 	const navigate = useNavigate();
 	const [date, setDate] = React.useState<{
 		endValue: Date | null;
@@ -22,12 +29,22 @@ const Reservation = () => {
 	};
 
 	const handleClick = (e) => {
+		setAlert(true);
+		setTimeout(() => {
+			setAlert(false);
+		}, 1500);
+
 		e.preventDefault();
 		if (!selectedTimeSlot || !selectedPeopleSlot) {
-			alert('Please select a time and number of people');
+			setMsg('Please select a time and number of people');
 		} else {
-			alert('Thanks for reserving a table! See you at the restaurant!ion');
-			navigate('/home');
+			setMsg('Thanks for reserving a table! See you at the restaurant!');
+			setColor('success');
+			setSeverity('success');
+
+			setTimeout(() => {
+				navigate('/home');
+			}, 1500);
 		}
 
 	}
@@ -57,6 +74,14 @@ const Reservation = () => {
 		<>
 			<section className='pt-24 w-96 h-[100vh] bg-gray-100 m-auto'>
 				<MetaTags title="Little Lemon Reservation" />
+
+				{
+					alert &&
+					<div className="-mt-10">
+						<ReactAlert msg={msg} msgSeverity={severity} msgColor={color} />
+					</div>
+				}
+
 				<header>
 					<h2 className="font-bold text-xl pl-10"> Date </h2>
 					<Datepicker
