@@ -59,7 +59,7 @@ const Login = () => {
 
 	return (
 
-		<section className="w-96 h-full bg-gray-100 m-auto">
+		<section className="w-[500px] h-full bg-gray-100 m-auto">
 			<MetaTags title="Little Lemon Login Page" />
 
 			<Link to="/" className="text-6xl">
@@ -81,7 +81,7 @@ const Login = () => {
 						type="text"
 						name="firstName"
 						id="first-name"
-						className="mb-5 border border-solid rounded-md ml-5 w-[21rem] bg-black text-white focus:bg-white focus:text-black pl-2"
+						className="mb-5 border border-solid rounded-md ml-5 w-[28rem] bg-black text-white focus:bg-white focus:text-black pl-2"
 					/>
 				</label>
 
@@ -94,7 +94,7 @@ const Login = () => {
 						type="text"
 						name="lastName"
 						id="last-name"
-						className="mb-5 border border-solid rounded-md ml-5 w-[21rem] bg-black text-white focus:bg-white focus:text-black pl-2"
+						className="mb-5 border border-solid rounded-md ml-5 w-[28rem] bg-black text-white focus:bg-white focus:text-black pl-2"
 					/>
 				</label>
 
@@ -109,7 +109,7 @@ const Login = () => {
 						placeholder="123-45-678"
 						name="phone"
 						id="phone"
-						className="mb-5 border border-solid rounded-md ml-5 w-[21rem] bg-black text-white focus:bg-white focus:text-black pl-2"
+						className="mb-5 border border-solid rounded-md ml-5 w-[28rem] bg-black text-white focus:bg-white focus:text-black pl-2"
 					/>
 				</label>
 
@@ -122,7 +122,7 @@ const Login = () => {
 						type="password"
 						name="password"
 						id="password"
-						className="mb-5 border border-solid rounded-md ml-5 w-[21rem] bg-black text-white focus:bg-white focus:text-black pl-2"
+						className="mb-5 border border-solid rounded-md ml-5 w-[28rem] bg-black text-white focus:bg-white focus:text-black pl-2"
 					/>
 				</label>
 
@@ -132,7 +132,7 @@ const Login = () => {
 						type="submit"
 						name="submit"
 						id="submit"
-						className="mt-2 mb-5 border border-solid rounded-md ml-5 w-[21rem] bg-black text-white hover:bg-white hover:text-black pl-2 hover:cursor-pointer transition-all duration-500 hover:border-solid hover:border border-black"
+						className="mt-2 mb-5 border border-solid rounded-md ml-5 w-[28rem] bg-black text-white hover:bg-white hover:text-black pl-2 hover:cursor-pointer transition-all duration-500 hover:border-solid hover:border border-black"
 					/>
 				</label>
 
